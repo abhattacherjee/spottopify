@@ -1,6 +1,6 @@
 # Spottopify
 
-Web application to showcase your top artists and albums on Spotify
+Web application to showcase your top artists and tracks on Spotify
 
 ## Available Scripts
 

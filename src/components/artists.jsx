@@ -21,7 +21,7 @@ class Artists extends Component {
         <div>
           <SearchBar
             name="searchBar"
-            label="Search for artists"
+            label="Search for artists or genre"
             onChange={this.handleSearch}
           />
         </div>

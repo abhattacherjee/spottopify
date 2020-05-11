@@ -16,7 +16,7 @@ const slice = createSlice({
       artists.loading = true;
     },
     artistsReceived: (artists, action) => {
-      artists.list = action.payload;
+      artists.list = action.payload.items;
       artists.loading = false;
       artists.lastFetch = Date.now();
     },
@@ -26,6 +26,10 @@ const slice = createSlice({
     artistsSearched: (artists, action) => {
       artists.searchText = action.payload.searchText;
     },
+    artistsCleared: (artists, action) => {
+      artists.list = [];
+      artists.lastFetch = "";
+    },
   },
 });
 
@@ -34,6 +38,7 @@ const {
   artistsReceived,
   artistsRequestFailed,
   artistsSearched,
+  artistsCleared,
 } = slice.actions;
 
 export const getArtistsByName = createSelector(
@@ -44,7 +49,8 @@ export const getArtistsByName = createSelector(
           artist =>
             artist.name
               .toLowerCase()
-              .search(artists.searchText.toLowerCase()) !== -1
+              .search(artists.searchText.toLowerCase()) !== -1 ||
+            artist.genres.includes(artists.searchText.toLowerCase())
         )
       : artists.list
 );
@@ -56,8 +62,8 @@ export const loadArtists = () => (dispatch, getState) => {
 
   return dispatch(
     actions.apiCallBegan({
-      url: "getTopArtists",
-      method: "post",
+      url: "/me/top/artists",
+      method: "get",
       onStart: artistsRequested.type,
       onSuccess: artistsReceived.type,
       onError: artistsRequestFailed.type,
@@ -66,5 +72,7 @@ export const loadArtists = () => (dispatch, getState) => {
 };
 
 export const searchArtists = searchText => artistsSearched({ searchText });
+
+export const clearArtists = () => artistsCleared();
 
 export default slice.reducer;
