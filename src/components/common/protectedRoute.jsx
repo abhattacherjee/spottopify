@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getToken } from "../../store/token";
+import { getTokenValue } from "../../store/token";
 
 const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
-  const token = useSelector(getToken);
+  // const token = checkIfSessionExpired(useSelector(getToken), useDispatch());
+  const token = useSelector(getTokenValue);
   return (
     <Route
       {...rest}

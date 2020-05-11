@@ -17,10 +17,18 @@ const slice = createSlice({
     authorizationCleared: (token, action) => {
       token.value = "";
     },
+    tokenExpired: (token, action) => {
+      token.value = "";
+      token.expiresIn = "";
+    },
   },
 });
 
-const { authorizationReceived, authorizationCleared } = slice.actions;
+const {
+  authorizationReceived,
+  authorizationCleared,
+  tokenExpired,
+} = slice.actions;
 
 export default slice.reducer;
 
@@ -34,5 +42,18 @@ export const clearToken = () => {
 
 export const getToken = createSelector(
   state => state.entities.token,
-  token => (moment().isAfter(token.expiresIn, "seconds") ? null : token.value)
+  // token => (moment().isAfter(token.expiresIn, "seconds") ? null : token.value)
+  token => token
 );
+export const getTokenValue = createSelector(
+  state => state.entities.token,
+  // token => (moment().isAfter(token.expiresIn, "seconds") ? null : token.value)
+  token => token.value
+);
+
+export const getTokenExpiration = createSelector(
+  state => state.entities.token,
+  token => token.expiresIn
+);
+
+export const invalidateToken = token => tokenExpired({});

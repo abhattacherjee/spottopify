@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getToken } from "../../store/token";
+import { getTokenValue } from "../../store/token";
 
 export const renderNavLink = (item, user) => {
   return (
@@ -11,7 +11,7 @@ export const renderNavLink = (item, user) => {
   );
 };
 const Navbar = ({ header, items }) => {
-  const userToken = useSelector(getToken);
+  const userToken = useSelector(getTokenValue);
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <Link className="navbar-brand" to={header.path}>

@@ -1,22 +1,19 @@
 import React from "react";
-import { clearToken, getToken } from "../store/token";
+import { getTokenValue } from "../store/token";
 import { useDispatch, useSelector } from "react-redux";
-import { clearArtists } from "../store/artists";
 import { Redirect } from "react-router-dom";
-import { clearTracks } from "../store/tracks";
+import { clearAllEntities } from "../store/utilities/storeUtils";
 
 const Logout = () => {
   const dispatch = useDispatch();
-  const token = useSelector(getToken);
+  const token = useSelector(getTokenValue);
   if (token)
     return (
       <div className="text-center">
         <button
           className="btn btn-success"
           onClick={() => {
-            dispatch(clearToken());
-            dispatch(clearArtists());
-            dispatch(clearTracks());
+            clearAllEntities(dispatch);
             window.location = "/";
           }}>
           Logout

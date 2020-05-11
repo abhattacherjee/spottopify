@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { saveToken, getToken } from "../store/token";
+import { saveToken, getTokenValue } from "../store/token";
 
 const Login = props => {
   const authEndpoint = "https://accounts.spotify.com/authorize";
@@ -10,8 +10,7 @@ const Login = props => {
   const scopes = ["user-top-read"];
   const dispatch = useDispatch();
 
-  const token = useSelector(getToken);
-
+  const token = useSelector(getTokenValue);
   useEffect(() => {
     if (token) return;
     let { access_token: _token, _expiresIn } = hash;
