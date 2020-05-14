@@ -2,6 +2,13 @@ import configureStore from "../configureStore";
 import * as artists from "../artists";
 import { getTopArtists } from "../../services/fakeSpotifyArtistsService";
 
+// tests
+// if artists exist in the cache
+//    load the store from the cache
+// if artists do not exist in the cache
+//    call api and load the store if auth token is valid
+//    clear store if auth token is not valid
+
 describe("artistsSlice", () => {
   let store;
   beforeEach(() => {
