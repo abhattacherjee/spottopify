@@ -40,7 +40,7 @@ A modern React web application to showcase your top artists and albums on Spotif
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: React 18.2.0
+- **Frontend**: React 18.3.1
 - **State Management**: Redux Toolkit 1.9.7
 - **UI Framework**: Bootstrap 5.3.7
 - **Icons**: Font Awesome 4.7.0
